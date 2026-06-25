@@ -1,33 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+  int i, len;
+  int v;
+
   if (argc < 2) return 1;
 
-  int i, len;
-  double v;
   len = strlen(argv[1]);
+  v = 0;
+
+  for (i = 0; i < len; i++) {
+    v = v * 2 + (argv[1][i] - '0');
+  }
 
   if (argv[1][0] == '1') {
-    v = - pow(2, len-1);
-  } else {
-    v = 0;
+    v -= 1 << len;
   }
 
-  for (i = len-1; i > 0; i--) {
-    if (argv[1][0] == '1') {
-      if (argv[1][i] == '1') {
-        v += pow(2, len-i-1);
-      }
-    }
-    else {
-      if (argv[1][i] == '1') {
-        v += pow(2, i-1);
-      }
-    }
-  }
-  printf("%d\n", (int)v);
+  printf("%d\n", v);
   return 0;
 }
